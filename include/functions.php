@@ -529,7 +529,7 @@ function output_profile_menu($charname, $curpage) {
       array( 'PAGE' => 'skills', 'BUTTON_NAME' => $language['BUTTON_SKILLS'], 'PERMISSION' => 1),
       array( 'PAGE' => 'corpses', 'BUTTON_NAME' => $language['BUTTON_CORPSES'], 'PERMISSION' => 1),
       array( 'PAGE' => 'factions', 'BUTTON_NAME' => $language['BUTTON_FACTION'], 'PERMISSION' => 1),
-      array( 'PAGE' => 'bots', 'BUTTON_NAME' => $language['BUTTON_BOTS'], 'PERMISSION' => $cb_show_bots),
+      array( 'PAGE' => 'bots', 'BUTTON_NAME' => $language['BUTTON_BOTS'], 'PERMISSION' => 1),
       array( 'PAGE' => 'bazaar', 'BUTTON_NAME' => $language['BUTTON_STORE'], 'PERMISSION' => 1),
       array( 'PAGE' => 'barter', 'BUTTON_NAME' => $language['BUTTON_BARTER'], 'PERMISSION' => 1),
       array( 'PAGE' => 'adventure', 'BUTTON_NAME' => $language['BUTTON_ADVENTURE'], 'PERMISSION' => 1),
