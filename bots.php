@@ -53,7 +53,7 @@ if ($char->Permission('bots')) $cb_error->message_die($language['MESSAGE_NOTICE'
 *********************************************/
 //get factions from the db
 $tpl = <<<TPL
-SELECT name, race, gender,
+SELECT bot_id, name, race, gender,
        class, face, level
 FROM bot_data 
 WHERE owner_id = %d 
@@ -96,9 +96,22 @@ $cb_template->assign_vars(array(
    'L_DONE'      => $language['BUTTON_DONE'])
 );
   
+// Fetch bot IDs in the raid roster
+$tpl_roster = <<<TPL
+SELECT bot_id 
+FROM bot_raid_roster
+TPL;
+$result_roster = $cbsql->query($tpl_roster);
+$roster_bots = array_column($cbsql->fetch_all($result_roster), 'bot_id');
+
+// Update bot names based on raid roster
 foreach($bots as $bot) {
+   $bot_name = $bot['name'];
+   if (in_array($bot['bot_id'], $roster_bots)) {
+      $bot_name .= " - Roster";
+   }
    $cb_template->assign_both_block_vars("bots", array( 
-      'NAME'    => $bot['name'],
+      'NAME'    => $bot_name,
       'AVATAR_IMG' => getAvatarImage($bot['race'], $bot['gender'], $bot['face']),
       'RACE'    => $dbracenames[$bot['race']],
       'CLASS'   => $dbclassnames[$bot['class']],
