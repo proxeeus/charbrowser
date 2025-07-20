@@ -120,15 +120,17 @@ usort($bots, function($a, $b) use ($roster_bots) {
 // Update bot names based on raid roster
 foreach($bots as $bot) {
    $bot_name = $bot['name'];
+   $bot_roster = "";
    if (in_array($bot['bot_id'], $roster_bots)) {
-      $bot_name .= " - Roster";
+      $bot_roster = "Raider";
    }
    $cb_template->assign_both_block_vars("bots", array( 
       'NAME'    => $bot_name,
       'AVATAR_IMG' => getAvatarImage($bot['race'], $bot['gender'], $bot['face']),
       'RACE'    => $dbracenames[$bot['race']],
       'CLASS'   => $dbclassnames[$bot['class']],
-      'LEVEL'    => $bot['level'])
+      'LEVEL'   => $bot['level'],
+      'ROSTER'  => $bot_roster)
    );
 }
  

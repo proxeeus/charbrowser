@@ -8,6 +8,7 @@
       <div class='CB_Bot_Caption'>
          <p>{bots.NAME}</p>
          <p>{bots.LEVEL} {bots.RACE} {bots.CLASS}</p>
+         <p><b><i>{bots.ROSTER}</i></b></p>
       </div>
    </a>
    <!-- END bots -->
