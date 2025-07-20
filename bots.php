@@ -104,6 +104,19 @@ TPL;
 $result_roster = $cbsql->query($tpl_roster);
 $roster_bots = array_column($cbsql->fetch_all($result_roster), 'bot_id');
 
+// Sort bots to prioritize those in the raid roster
+usort($bots, function($a, $b) use ($roster_bots) {
+    $a_in_roster = in_array($a['bot_id'], $roster_bots);
+    $b_in_roster = in_array($b['bot_id'], $roster_bots);
+
+    // Bots in the roster come first
+    if ($a_in_roster && !$b_in_roster) return -1;
+    if (!$a_in_roster && $b_in_roster) return 1;
+
+    // Otherwise, sort alphabetically by name
+    return strcmp($a['name'], $b['name']);
+});
+
 // Update bot names based on raid roster
 foreach($bots as $bot) {
    $bot_name = $bot['name'];
